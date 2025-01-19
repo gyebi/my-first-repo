@@ -1,0 +1,31 @@
+# just trying to test my coding skills 
+
+#define file and open file
+file_name = input ('Enter file name: ')
+fh = open(file_name)
+
+#creat a Dictionary 
+sender_counts: dict = {}
+
+for line in fh:
+    # Check if the line starts with 'From '
+    if line.startswith('From '):
+        #Split the line into words and extract the sender email (second word)
+        sender = line.split()[1]
+        #Update the sender_counts dictionary by incrementing the count for the sender
+        sender_counts[sender] = sender_counts.get(sender, 0) + 1
+
+# Initialize variables to track the most prolific sender
+max_sender = None
+max_count = 0
+
+# Iterate through the sender_counts dictionary to find the sender with the most messages
+for sender, count in sender_counts.items():
+    if count > max_count:
+        max_sender = sender
+        max_count = count
+
+if max_sender is not None:
+    print(max_sender , max_count )
+else:
+    print("No sender data found.")
